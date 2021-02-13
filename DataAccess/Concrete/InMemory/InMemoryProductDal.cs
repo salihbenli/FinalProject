@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,11 @@ namespace DataAccess.Concrete.InMemory
         {
             _products = new List<Product> 
             {
-               new Product{ProductId=1,CategoryId=1,ProductName="Bardak",UnitPrice=15,UnitInStock=15},
-               new Product{ProductId=1,CategoryId=1,ProductName="Kamera",UnitPrice=500,UnitInStock=70},
-               new Product{ProductId=1,CategoryId=1,ProductName="Telefon",UnitPrice=1500,UnitInStock=4},
-               new Product{ProductId=1,CategoryId=1,ProductName="Klavye",UnitPrice=100,UnitInStock=3},
-               new Product{ProductId=1,CategoryId=1,ProductName="Fare",UnitPrice=85,UnitInStock=1}
+               new Product{ProductId=1,CategoryId=1,ProductName="Bardak",UnitPrice=15,UnitsInStock=15},
+               new Product{ProductId=1,CategoryId=1,ProductName="Kamera",UnitPrice=500,UnitsInStock=70},
+               new Product{ProductId=1,CategoryId=1,ProductName="Telefon",UnitPrice=1500,UnitsInStock=4},
+               new Product{ProductId=1,CategoryId=1,ProductName="Klavye",UnitPrice=100,UnitsInStock=3},
+               new Product{ProductId=1,CategoryId=1,ProductName="Fare",UnitPrice=85,UnitsInStock=1}
             };
         }
         public void Add(Product product)
@@ -62,13 +63,18 @@ namespace DataAccess.Concrete.InMemory
            return _products.Where(p => p.CategoryId == categoryId).ToList();
         }
 
+        public List<ProductDetailDto> GetProductDetails()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Product product)
         {
             Product productToUpdate = _products.SingleOrDefault(p => p.ProductId == product.ProductId);
             productToUpdate.ProductName = product.ProductName;
             productToUpdate.CategoryId = product.CategoryId;
             productToUpdate.UnitPrice = product.UnitPrice;
-            productToUpdate.UnitInStock = product.UnitInStock;
+            productToUpdate.UnitsInStock = product.UnitsInStock;
         }
     }
 }
